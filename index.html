@@ -3,23 +3,50 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <link rel="stylesheet" type="text/css" href="index_style.css" >
+    
   </head>
+  
   <body>
+    
     <script>
-
+      
+   
+      
       $(document).ready(function(){
         var $body = $('body');
         $body.html('');
 
+        var $title = $('<h1>TWIDDLER</h1>');
+        
+        $title.appendTo($body);
+
+        var $button = $('<button id="btrefresh" onclick = "location.reload()"> "New Tweets" <button/>');
+        $button.appendTo($body);
+        
         var index = streams.home.length - 1;
         while(index >= 0){
           var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
+         
+          var $tweet = $('<div class = "tweet"></div>');
           $tweet.text('@' + tweet.user + ': ' + tweet.message);
           $tweet.appendTo($body);
+          var d = new Date();
+          var hours = d.getHours();
+          var min = d.getMinutes();
+          var sec = d.getSeconds();
+          var month = d.getMonth();
+          var day = d.getDate();
+          var year = d.getFullYear();
+          var $date = $('<div class ="date"> </div>');
+          $date.text(`${hours}:${min}:${sec} ${month}/${day}/${year}`)     
+          $date.appendTo($body);
+       
           index -= 1;
         }
 
+        
+        
       });
 
     </script>
